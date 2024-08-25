@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-// Define TypeScript interface for backend response
 interface FilterResponse {
   is_success: boolean;
   user_id: string;
@@ -25,6 +24,7 @@ const MultifilterComponent: React.FC = () => {
   const [inputArray, setInputArray] = useState<string>('["M","1","334","4","B","Z","d","d"]');
   const [results, setResults] = useState<FilterResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false); // Loader state
 
   const handleOptionChange = (value: string) => {
     setSelectedOptions(prev => {
@@ -43,6 +43,7 @@ const MultifilterComponent: React.FC = () => {
   };
 
   const parseInputArray = async () => {
+    setLoading(true); // Start loading
     try {
       const array = JSON.parse(inputArray);
       const filterOptions = Array.from(selectedOptions);
@@ -63,6 +64,8 @@ const MultifilterComponent: React.FC = () => {
       console.error('Error filtering data:', error);
       setResults(null);
       setError('Error processing request.');
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -122,6 +125,7 @@ const MultifilterComponent: React.FC = () => {
       </button>
       
       <div className="mt-6">
+        {loading && <p className="text-blue-500">Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}
         {results && (
           <div>
