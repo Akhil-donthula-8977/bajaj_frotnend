@@ -79,7 +79,7 @@ const MultifilterComponent: React.FC = () => {
 
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Multifilter Component</h1>
+      <h1 className="text-2xl font-bold mb-4 text-gray-800">Multifilter Component - By Donthula Akhil (21BEC0445)</h1>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Filter Options:
